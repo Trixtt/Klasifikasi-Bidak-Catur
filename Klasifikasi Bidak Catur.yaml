@@ -1,0 +1,111 @@
+allow_embedding: false
+config:
+  client: {}
+  server: {}
+correct_dependency_ids: {}
+dependency_code: {}
+dependency_ids: {}
+dependency_order: []
+exported_table_schema: []
+forms:
+- class_name: Form1
+  code: |-
+    from ._anvil_designer import Form1Template
+    from anvil import *
+    import anvil.server
+
+    class Form1(Form1Template):
+      def __init__(self, **properties):
+        # Set Form properties and Data Bindings.
+        self.init_components(**properties)
+
+        # Any code you write here will run before the form opens.
+
+      def button_1_click(self, **event_args):
+        """This method is called when the button is clicked"""
+        file = self.file_loader_1.file
+
+        if file:
+          # Tampilkan gambar di preview
+          self.image_1.source = file
+
+          # Kirim ke server dan dapatkan hasil
+          hasil = anvil.server.call('classify_image', file)
+
+          # Tampilkan hasil prediksi
+          self.label_1.text = f"NAMA BIDAK: {hasil.upper()}"
+        else:
+          self.label_1.text = "Silakan unggah gambar terlebih dahulu."
+      pass
+  components:
+  - layout_properties: {full_width_row: true, grid_position: 'WCJOOS,HHISVX', row_background: '#1100ff'}
+    name: canvas_1
+    properties: {height: 49.79998779296875}
+    type: Canvas
+  - data_bindings: []
+    layout_properties: {grid_position: 'XMWSMW,MYRXRB'}
+    name: label_3
+    properties: {align: center, bold: true, font: Times New Roman, font_size: 32, italic: false, text: KLASIFIKASI BIDAK CATUR SEDERHANA}
+    type: Label
+  - layout_properties: {grid_position: 'IQNOIS,HWBXGH'}
+    name: label_2
+    properties: {align: center, font_size: 16, text: KIRIM FOTO BIDAK CATUR YANG INGIN ANDA PREDIKSI}
+    type: Label
+  - layout_properties: {grid_position: 'WIKUXQ,GUAOHG'}
+    name: file_loader_1
+    properties: {text: Upload Gambar Bidak}
+    type: FileLoader
+  - event_bindings: {click: button_1_click}
+    layout_properties: {grid_position: 'VXVBNX,KDTEFU'}
+    name: button_1
+    properties: {text: TEBAK}
+    type: Button
+  - layout_properties: {grid_position: 'TOTYBT,ERAYWJ'}
+    name: label_1
+    properties: {align: center, bold: true, font_size: 18, italic: false, underline: true}
+    type: Label
+  - layout_properties: {full_width_row: false, grid_position: 'WYTQTU,YTQKDN'}
+    name: image_1
+    properties: {height: '500'}
+    type: Image
+  container: {type: ColumnPanel}
+  id: '1748242597483450224826759.07263'
+  is_package: true
+modules: []
+name: Klasifikasi Bidak Catur
+package_name: Klasifikasi_Bidak_Catur
+runtime_options:
+  client_version: '3'
+  server_spec: {base: python310-minimal, requirements: ''}
+  server_version: python3-sandbox
+  version: 2
+scripts: []
+server_modules: []
+services:
+- client_config: {}
+  server_config: {}
+  source: /runtime/services/tables.yml
+startup_form: Form1
+theme:
+  assets:
+  - {content: PGRpdiBhbnZpbC1zbG90LXJlcGVhdD0iZGVmYXVsdCI+CjwvZGl2PgoKPGNlbnRlciBzdHlsZT0iY29sb3I6Izg4ODsgbWFyZ2luOiA1MHB4OyI+CiAgPGk+VGhpcyBpcyBhIHBsYWNlaG9sZGVyIGZvciB5b3VyIGFwcCdzIGN1c3RvbSBIVE1MLiBFZGl0IGl0IGJ5IGNoYW5naW5nIHRoZSB0aGVtZSBhc3NldHMuPC9pPgo8L2NlbnRlcj4K, id: EULWINZIYLWB53QIFT2FHTS6ZFYGZQGE, name: standard-page.html}
+  - {content: '', id: PPUGC5JYPZXWSFMGCON4VQ6T4WCXS45X, name: theme.css}
+  parameters:
+    roles: []
+  templates:
+  - description: ''
+    form:
+      class_name: Form
+      code: "from ._anvil_designer import $NAME$Template\nfrom anvil import *\n\nclass $NAME$($NAME$Template):\n\n  def __init__(self, **properties):\n    # Set Form properties and Data Bindings.\n    self.init_components(**properties)\n\n    # Any code you write here will run before the form opens.\n    \n"
+      components:
+      - layout_properties: {slot: default}
+        name: content_panel
+        properties: {}
+        type: ColumnPanel
+      container:
+        properties: {html: '@theme:standard-page.html'}
+        type: HtmlTemplate
+      is_package: true
+    img: null
+    name: Standard Page
+uplink_visible: true
